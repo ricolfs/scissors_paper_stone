@@ -58,6 +58,8 @@ function playRound (playerSelection,computerSelection) {
     }
 
 }
+
+
 ///working
 
  function game() {
@@ -67,22 +69,25 @@ function playRound (playerSelection,computerSelection) {
     for(let i=0;i<5;i++) {
     let playerSelection = prompt("Do you choose rock, paper or scissors?");
     let result = playRound (playerSelection, getComputerChoice());
-    // console.log(result)
-    console.log(`Player score is ${playerScore}`)
-    //    if (result==`Player Wins!`) {
-    //     playerScore++;
-    //     console.log(`Player score is ${playerScore}`)
-    //    }
-    //    else if(result==`Computer Wins!`) {
-    //     computerScore++;
-    //     console.log(`Computer Score is ${computerScore}`)
-    //    }
-    // }
-    // if (playerScore>computerScore) {
-    //     return ("Player won the game!");
-    // }
-    // else {return ("Computer won the game!");}
+
+       if (result=="Player wins!") { // why is this condition not satisfied??
+        playerScore++;
+        console.log(`Player score is ${playerScore}`)
+        }
+        else if (result=="Computer wins!") {
+         computerScore++;
+         console.log(`Computer Score is ${computerScore}`)
+        }
+        else {
+            console.log(`Tie!`)
+        }
+     }
+     if (playerScore>computerScore) {
+    console.log("Player won the game!");
+     }
+     else {console.log("Computer won the game!");}
     }
-}
+ 
+
 
  game();
