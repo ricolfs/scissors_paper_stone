@@ -61,33 +61,33 @@ function playRound (playerSelection,computerSelection) {
 
 
 ///working
-
- function game() {
-    let playerScore = 0;
-    let computerScore = 0;
+// Removing the logic 
+//  function game() {
+//     let playerScore = 0;
+//     let computerScore = 0;
     
-    for(let i=0;i<5;i++) {
-    let playerSelection = prompt("Do you choose rock, paper or scissors?");
-    let result = playRound (playerSelection, getComputerChoice());
+//     for(let i=0;i<5;i++) {
+//     let playerSelection = prompt("Do you choose rock, paper or scissors?");
+//     let result = playRound (playerSelection, getComputerChoice());
 
-       if (result=="Player wins!") { // why is this condition not satisfied??
-        playerScore++;
-        console.log(`Player score is ${playerScore}`)
-        }
-        else if (result=="Computer wins!") {
-         computerScore++;
-         console.log(`Computer Score is ${computerScore}`)
-        }
-        else {
-            console.log(`Tie!`)
-        }
-     }
-     if (playerScore>computerScore) {
-    console.log("Player won the game!");
-     }
-     else {console.log("Computer won the game!");}
-    }
+//        if (result=="Player wins!") { // why is this condition not satisfied??
+//         playerScore++;
+//         console.log(`Player score is ${playerScore}`)
+//         }
+//         else if (result=="Computer wins!") {
+//          computerScore++;
+//          console.log(`Computer Score is ${computerScore}`)
+//         }
+//         else {
+//             console.log(`Tie!`)
+//         }
+//      }
+//      if (playerScore>computerScore) {
+//     console.log("Player won the game!");
+//      }
+//      else {console.log("Computer won the game!");}
+//     }
  
 
 
- game();
+//  game();
