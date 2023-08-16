@@ -1,93 +1,51 @@
-//functions needed 
-/* 1. getComputerChoice = randomly return rock paper or scissor
-2. playRound = takes two parameters playerSelection and computerSelection and returns a string that declares the winner of the round
-3. Make playerSelection case insensitive so that can inpur anything
-4. game()= use previous function inside this one to play 5 round game that keeps score and reports a winner or loser at the endßßßßßßßßßßßßßßßß
-use return() to display the results of each round and the winner at the end
-use prompt() to get input from the user
-*/
+const selectionOptions = document.querySelectorAll("[data-selection]");
+const SELECTIONS = [ 
+    {
+        name: "rock",
+        beats: "scissors"
+    },
+    {
+        name:"paper",
+        beats: "rock"
+    },
+    {
+        name:"scissors",
+        beats:"paper"
+    }
+];
+const computerScoreSpan = document.querySelector("[data-computer-score]");
+const userScoreSpan = document.querySelector("[data-user-score]");
 
-//Purpose: Randomly return rock paper or scissors
-//Parameters: None
-//Output: Either Rock paper or scissors
-//Algorithm: 1. establish rock, scissors and paper variables as numbers between 1 and 3 inclusive
-        //   2. Use math.random() function and math.floor function to output a random number between 1 and 3 that represents rock, paper or scissors
-function getComputerChoice () {
-    let random = (Math.floor(Math.random() * (3)) + 1); 
-    return random;
-    }
-    //WORKING   
-
-
-//Name: playRound
-//Parameters: playerSelection, computerSelection
-//Output: String that declares the winner of the round
-//Challenge: Make case insensitive so that any playerSelection can be recognised
-
-function playRound (playerSelection,computerSelection) {
-    let playerValue = playerSelection.toLowerCase();
-    let cwin = "Computer wins!";
-    let pwin = "Player wins!";
-    let tie = "Tie!"
-    if (playerValue === "rock" && computerSelection==1){
-        return tie
-    }
-    else if (playerValue=="rock" && computerSelection==2){
-        return(cwin)
-    }
-    else if (playerValue=="rock" && computerSelection==3){
-        return(pwin)
-    }
-    else if (playerValue=="paper" && computerSelection==2){
-        return(tie)
-    }
-    else if (playerValue=="paper" && computerSelection==1){
-        return(pwin)
-    }
-    else if (playerValue=="paper" && computerSelection==3){
-        return(cwin)
-    }
-    else if (playerValue=="scissor" && computerSelection==3){
-        return(tie)
-    }
-    else if (playerValue=="scissor" && computerSelection==1){
-        return(cwin)
-    }
-    else if (playerValue=="scissor" && computerSelection==2){
-        return(pwin)
-    }
-
+function incrementScore(scoreSpan) {
+    scoreSpan.innerText = parseInt(scoreSpan.innerText) + 1;
 }
 
+selectionOptions.forEach(selectionOption => {
+    selectionOption.addEventListener("click", e => {
+        const selectionName = selectionOption.dataset.selection;
+        const selection = SELECTIONS.find(selection => selection.name === selectionName);
+        console.log(selection)
+        makeSelection(selection);
+    })
+   
+})
 
-///working
-// Removing the logic 
-//  function game() {
-//     let playerScore = 0;
-//     let computerScore = 0;
-    
-//     for(let i=0;i<5;i++) {
-//     let playerSelection = prompt("Do you choose rock, paper or scissors?");
-//     let result = playRound (playerSelection, getComputerChoice());
+function makeSelection (selection){
+    const randomSelection = computerSelection();
+    const yourWinner = isWinner(selection, randomSelection);
+    const computerWinner = isWinner(randomSelection, selection);
+    console.log(computerSelection())
+    console.log(yourWinner);
+    console.log(computerWinner)
+    if (yourWinner) { incrementScore(userScoreSpan)};
+    if (computerWinner) {incrementScore(computerScoreSpan)};
+}
 
-//        if (result=="Player wins!") { // why is this condition not satisfied??
-//         playerScore++;
-//         console.log(`Player score is ${playerScore}`)
-//         }
-//         else if (result=="Computer wins!") {
-//          computerScore++;
-//          console.log(`Computer Score is ${computerScore}`)
-//         }
-//         else {
-//             console.log(`Tie!`)
-//         }
-//      }
-//      if (playerScore>computerScore) {
-//     console.log("Player won the game!");
-//      }
-//      else {console.log("Computer won the game!");}
-//     }
- 
+function computerSelection() {
+    const randomIndex = Math.floor(Math.random() * 3);
+    return SELECTIONS[randomIndex];
+}
 
-
-//  game();
+function isWinner (selection, opponentSelection) {
+    return selection.beats === opponentSelection.name;
+}
